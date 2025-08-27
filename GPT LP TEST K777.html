@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KUNCI777 - Landing Page</title>
+  <style>
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+      background-color: #0b0b16;
+      min-height: 100dvh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("casino-bg.jpg") center/cover no-repeat;
+      filter: blur(10px) brightness(0.6);
+      z-index: 0;
+    }
+
+    #particles {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* ===== Navbar ===== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 14px;
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      z-index: 4;
+      box-sizing: border-box;
+    }
+    .navbar h2 {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #00f5d4, #00bbf9, #ff006e);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      white-space: nowrap;
+    }
+    .navbar nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      max-width: 100%;
+      transition: all 0.3s ease;
+    }
+    .navbar nav a {
+      margin-left: 12px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      opacity: 0.85;
+      transition: opacity .2s;
+      white-space: nowrap;
+    }
+    .navbar nav a:hover { opacity: 1; }
+
+    /* ===== Hamburger Menu ===== */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 4px;
+      z-index: 5;
+      transition: transform 0.3s ease;
+    }
+    .hamburger span {
+      width: 22px;
+      height: 2px;
+      background: #fff;
+      border-radius: 2px;
+      transition: all 0.35s cubic-bezier(0.68,-0.55,0.27,1.55);
+    }
+
+    /* Animate into X */
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(4px, 4px);
+    }
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(4px, -4px);
+    }
+
+    .hamburger:hover span {
+      transform: scaleX(1.2);
+    }
+
+    .navbar nav.mobile-hidden {
+      display: none;
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    .navbar nav.mobile-show {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 50px;
+      right: 14px;
+      background: rgba(0,0,0,0.85);
+      padding: 10px;
+      border-radius: 8px;
+      backdrop-filter: blur(8px);
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .navbar nav.mobile-show a {
+      margin: 6px 0;
+      font-size: 0.95rem;
+    }
+
+    /* ===== Content Wrapper ===== */
+    .content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      min-height: 100dvh;
+      padding: 80px 16px 60px;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      margin: 0 0 20px;
+      font-size: clamp(2.2rem, 6vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #00f5d4, #00bbf9, #ff006e);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glow 2.5s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 8px #00f5d4, 0 0 16px #00bbf9, 0 0 24px #ff006e; }
+      to { text-shadow: 0 0 16px #ff006e, 0 0 28px #00bbf9, 0 0 36px #00f5d4; }
+    }
+
+    .promo {
+      width: min(92vw, 800px);
+      background: rgba(255, 255, 255, 0.08);
+      padding: 18px;
+      border-radius: 14px;
+      box-shadow: 0 0 16px rgba(0, 255, 200, 0.25);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .promo img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      display: block;
+      margin-bottom: 14px;
+    }
+
+    .promo p {
+      font-size: clamp(0.95rem, 2.2vw, 1.1rem);
+      line-height: 1.6;
+      color: #e6e6e6;
+      margin: 0;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 10px 22px;
+      font-size: 1rem;
+      color: #fff;
+      background: linear-gradient(90deg, #00f5d4, #00bbf9, #ff006e);
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform .25s ease, box-shadow .25s ease, opacity .25s ease;
+      box-shadow: 0 0 12px rgba(0, 255, 200, 0.35);
+      animation: pulse 2s infinite;
+    }
+
+    .btn:hover { transform: translateY(-1px) scale(1.03); box-shadow: 0 0 25px rgba(255, 0, 110, 0.7), 0 0 40px rgba(0, 255, 200, 0.6); }
+    .btn:active { transform: scale(0.98); opacity: 0.9; }
+
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 0 12px rgba(0, 255, 200, 0.35); }
+      50% { transform: scale(1.05); box-shadow: 0 0 25px rgba(255, 0, 110, 0.7), 0 0 40px rgba(0, 255, 200, 0.6); }
+      100% { transform: scale(1); box-shadow: 0 0 12px rgba(0, 255, 200, 0.35); }
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      padding: 6px;
+      font-size: 0.75rem;
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-top: 1px solid rgba(255,255,255,0.15);
+      z-index: 4;
+      color: #ccc;
+      box-sizing: border-box;
+    }
+
+    /* Responsive Navbar */
+    @media (max-width: 768px) {
+      .navbar nav { display: none; }
+      .hamburger { display: flex; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particles"></canvas>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <h2>KUNCI777</h2>
+    <nav id="navMenu" class="mobile-hidden">
+      <a href="https://kunci777v0.com/">Beranda</a>
+      <a href="https://kunci777v0.com/promotions/all">Promo</a>
+      <a href="https://kunci777v0.com/register">Daftar</a>
+      <a href="https://kunci777v0.com/contact">Kontak</a>
+    </nav>
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </header>
+
+  <!-- Content -->
+  <main class="content">
+    <h1>KUNCI777</h1>
+    <section class="promo">
+      <img src="https://i.postimg.cc/JncxJsgp/Leonardo-Phoenix-09-Create-a-vibrant-promotional-banner-for-an-2.jpg" alt="Promo KUNCI777" />
+      <p>
+        Bergabung sekarang di <strong>KUNCI777</strong> dan rasakan sensasi bermain di platform terpercaya dengan kualitas terbaik!
+        Permainan seru, peluang menang besar, dan reward melimpah menanti Anda.
+        Main lebih mudah, menang lebih cepat, hadiah lebih nyata – hanya di sini tempat terbaik untuk para pemenang sejati!
+      </p>
+      <a href="https://kunci777v0.com/register" class="btn">Gabung Sekarang</a>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 KUNCI777. Semua Hak Dilindungi.
+  </footer>
+
+  <script>
+    // Particle Background
+    const canvas = document.getElementById("particles");
+    const ctx = canvas.getContext("2d", { alpha: true });
+    let particles = [];
+    const colors = ["#00f5d4", "#00bbf9", "#ff006e", "#f6c90e", "#9b5de5"];
+
+    function resizeCanvas() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.floor(window.innerWidth * dpr);
+      canvas.height = Math.floor(window.innerHeight * dpr);
+      canvas.style.width = window.innerWidth + "px";
+      canvas.style.height = window.innerHeight + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    window.addEventListener("resize", resizeCanvas, { passive: true });
+    resizeCanvas();
+
+    class Particle {
+      constructor() { this.reset(true); }
+      reset(randomizePos = false) {
+        this.x = randomizePos ? Math.random() * canvas.width : this.x;
+        this.y = randomizePos ? Math.random() * canvas.height : this.y;
+        this.r = Math.random() * 2 + 1;
+        this.vx = (Math.random() - 0.5) * 0.3;
+        this.vy = (Math.random() - 0.5) * 0.3;
+        this.a = Math.random();
+        this.da = 0.006 * (Math.random() > 0.5 ? 1 : -1);
+        this.color = colors[(Math.random() * colors.length) | 0];
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+        this.a += this.da;
+        if (this.a <= 0 || this.a >= 1) this.da *= -1;
+      }
+      draw() {
+        ctx.globalAlpha = this.a;
+        ctx.fillStyle = this.color;
+        ctx.shadowBlur = 16;
+        ctx.shadowColor = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.globalAlpha = 1;
+        ctx.shadowBlur = 0;
+      }
+    }
+
+    function init() {
+      particles = [];
+      const count = Math.min(120, Math.floor((canvas.width * canvas.height) / 45000));
+      for (let i = 0; i < count; i++) particles.push(new Particle());
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+      }
+      requestAnimationFrame(animate);
+    }
+
+    init();
+    animate();
+
+    // Hamburger Menu Toggle
+    const hamburger = document.getElementById("hamburger");
+    const navMenu = document.getElementById("navMenu");
+
+    hamburger.addEventListener("click", () => {
+      hamburger.classList.toggle("active");
+      if (navMenu.classList.contains("mobile-show")) {
+        navMenu.classList.remove("mobile-show");
+        navMenu.classList.add("mobile-hidden");
+      } else {
+        navMenu.classList.remove("mobile-hidden");
+        navMenu.classList.add("mobile-show");
+      }
+    });
+  </script>
+</body>
+</html>
